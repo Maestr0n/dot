@@ -4,8 +4,8 @@ import random
 
 from src.entities.base import Entity
 
-window_size = (300, 300)
-screen_color = (10, 152, 14)
+window_size = (600, 600)
+screen_color = (255, 255, 255)
 
 
 def init():
@@ -30,49 +30,56 @@ def random_color_cord(win_color) -> tuple:
     return random_cord, random_color
 
 
-def run(screen: pygame.Surface, window_color=screen_color):
-    dot_x = window_size[0] // 2
-    dot_y = window_size[1] // 2
-    entity_image_path = '/home/aleksanyan/PycharmProjects/dot/src/images/dot.png'
-    entity = Entity(entity_image_path, dot_x, dot_y)
+def run(screen,  window_color=screen_color, window=window_size):
+    quantity_dot = 0
+    dot_x = 405.5
+    dot_y = 516
+    entity_image_path = '/home/aleksanyan/PycharmProjects/dot/src/images/smile.png'
+    entity = Entity(entity_image_path, dot_x, dot_y, window)
     point = random_color_cord(window_color)
-
+    pinocio_image = pygame.image.load('/home/aleksanyan/PycharmProjects/dot/src/images/pinocio.png')
+    screen.blit(pinocio_image, (400, 391))
     while True:
-        pygame.draw.circle(screen, point[1], point[0], 5)
+
+        #font = pygame.font.SysFont('tlwgtypo', 30)
+        #score = font.render(f'{quantity_dot}', 1, (255, 255, 255), )
+        #screen.blit(score, (0, 0))
+        #pygame.draw.circle(screen, (0, 0, 0), point[0], 8)
+        #pygame.draw.circle(screen, point[1], point[0], 5)
         pygame.display.update()
         screen.fill(window_color)
-        screen.blit(entity.image, (entity.x, entity.y))
+        #screen.blit(entity.image, (entity.x, entity.y))
+
+        screen.blit(pinocio_image, (400, 391))
+        for dot in entity.cords:
+            pygame.draw.circle(screen, (234, 174, 126), dot, 5)
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP]:
             entity.go_up()
-        elif keys[pygame.K_DOWN]:
+        if keys[pygame.K_DOWN]:
             entity.go_down()
-        elif keys[pygame.K_LEFT]:
-            entity.go_left()
-        elif keys[pygame.K_RIGHT]:
+        if keys[pygame.K_LEFT]:
+            entity.go_left(screen)
+        if keys[pygame.K_RIGHT]:
             entity.go_right()
+        if keys[pygame.K_DELETE]:
+            entity.new_list()
+        if keys[pygame.K_SPACE]:
+            entity.del_end_point()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
 
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_UP:
-                    entity.go_down()
-                elif event.key == pygame.K_DOWN:
-                    entity.go_up()
-                elif event.key == pygame.K_LEFT:
-                    entity.go_left()
-                elif event.key == pygame.K_RIGHT:
-                    entity.go_right()
-
             dot_cord = entity.cord[0] + 24, entity.cord[1] + 24
-            point_cord = point[0]
-            if abs(dot_cord[0] - point_cord[0]) + abs(dot_cord[1] - point_cord[1]) <= 30:
-                window_color = point[1]
-                point = random_color_cord(window_color)
+            #point_cord = point[0]
+            #if abs(dot_cord[0] - point_cord[0]) + abs(dot_cord[1] - point_cord[1]) <= 30:
+            #    window_color = point[1]
+            #    point = random_color_cord(window_color)
+            #    quantity_dot += 1
+
 
 
 if __name__ == '__main__':
