@@ -4,18 +4,18 @@ import pygame
 class Entity:
     x: float
     y: float
-    move: int = 1 / 4
+    move: int = 1 / 2
     image_path: str
     cord_list = []
 
     def __init__(self, image_path: str, x: float, y: float, win_size: tuple):
-       # self._image_path = image_path
-        #self.image = pygame.image.load(self._image_path)
+        self._image_path = image_path
+        self.image = pygame.image.load(self._image_path)
         self.x = x
         self.y = y
         self.win_size = win_size
 
-    def go_left(self, screen):
+    def go_left(self):
         if self.x > -1:
             self.x -= self.move
             self.cord_list.append(self.cord)
