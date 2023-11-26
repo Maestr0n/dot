@@ -15,7 +15,7 @@ def init():
     icon_path = '/home/aleksanyan/PycharmProjects/dot/src/images/icon.png'
 
     screen = pygame.display.set_mode(window_size)
-    pygame.display.set_caption('DoT')
+    pygame.display.set_caption('Packman')
     pygame.display.set_icon(pygame.image.load(icon_path))
     screen.fill(screen_color)
 
@@ -26,7 +26,7 @@ def random_color_cord(win_color) -> tuple:
     random_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
     if win_color == random_color:
         random_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
-    random_cord = (random.randint(0, window_size[0] - 3), random.randint(0, window_size[1] - 3))
+    random_cord = (random.randint(0, window_size[0] - 63), random.randint(0, window_size[1] - 47))
 
     return random_cord, random_color
 
@@ -46,6 +46,7 @@ def run(screen, window_color=screen_color, window=window_size):
     gost = pygame.image.load(random.choice(gosts_path))
 
     while True:
+
 
         font = pygame.font.SysFont('tlwgtypo', 30)
         score = font.render(f'{quantity_dot}', 1, (255, 255, 255), )

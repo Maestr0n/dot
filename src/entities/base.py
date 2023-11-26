@@ -4,7 +4,7 @@ import pygame
 class Entity:
     x: float
     y: float
-    move: int = 2
+    move: int = 0.5
     image_path: str
 #    cord_list = []
 
