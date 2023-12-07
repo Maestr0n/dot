@@ -1,14 +1,16 @@
 import sys
 import pygame
+import random
 
 from src.entities.base import Entity
 
 window_size = (300, 300)
 screen_color = (10, 152, 14)
 
+
 def init():
     pygame.init()
-    icon_path = '/home/olgert/projects/dot/src/images/icon.png'
+    icon_path = '/home/aleksanyan/PycharmProjects/dot/src/images/icon.png'
 
     screen = pygame.display.set_mode(window_size)
     pygame.display.set_caption('DoT')
@@ -18,15 +20,36 @@ def init():
     return screen
 
 
-def run(screen: pygame.Surface):
+def random_color_cord() -> tuple:
+
+    random_color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+    random_cord = (random.randint(0, window_size[0]), random.randint(0, window_size[1]))
+
+    return random_cord, random_color
+
+
+def run(screen: pygame.Surface, window_color=screen_color):
     dot_x = window_size[0] // 2
     dot_y = window_size[1] // 2
-    entity_image_path = '/home/olgert/projects/dot/src/images/dot.png'
+    entity_image_path = '/home/aleksanyan/PycharmProjects/dot/src/images/dot.png'
     entity = Entity(entity_image_path, dot_x, dot_y)
+    point = random_color_cord()
+
     while True:
+        pygame.draw.circle(screen, point[1], point[0], 5)
         pygame.display.update()
-        screen.fill(screen_color)
+        screen.fill(window_color)
         screen.blit(entity.image, (entity.x, entity.y))
+
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_UP]:
+            entity.go_up()
+        elif keys[pygame.K_DOWN]:
+            entity.go_down()
+        elif keys[pygame.K_LEFT]:
+            entity.go_left()
+        elif keys[pygame.K_RIGHT]:
+            entity.go_right()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -43,7 +66,11 @@ def run(screen: pygame.Surface):
                 elif event.key == pygame.K_RIGHT:
                     entity.go_right()
 
-        pygame.display.flip()
+            dot_cord = entity.cord[0] + 24, entity.cord[1] + 24
+            point_cord = point[0]
+            if abs(dot_cord[0] - point_cord[0]) + abs(dot_cord[1] - point_cord[1]) <= 30:
+                window_color = point[1]
+                point = random_color_cord()
 
 
 if __name__ == '__main__':
