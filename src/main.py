@@ -12,7 +12,7 @@ screen_color = (2, 2, 2)
 
 def init():
     pygame.init()
-    icon_path = '/home/aleksanyan/PycharmProjects/dot/src/images/icon.png'
+    icon_path = './src/images/icon.png'
 
     screen = pygame.display.set_mode(window_size)
     pygame.display.set_caption('Packman')
@@ -35,14 +35,14 @@ def run(screen, window_color=screen_color, window=window_size):
     quantity_dot = 0
     dot_x = window[0] // 2
     dot_y = window[1] // 2
-    packman_open_path = '/home/aleksanyan/PycharmProjects/dot/src/images/packman/l.png'
-    packman_close_path = '/home/aleksanyan/PycharmProjects/dot/src/images/packman/close.png'
+    packman_open_path = './src/images/packman/l.png'
+    packman_close_path = './src/images/packman/close.png'
     entity = Entity(packman_open_path, dot_x, dot_y, window)
     point = random_color_cord(window_color)
-    gosts_path = ('/home/aleksanyan/PycharmProjects/dot/src/images/packman gost/gost_red.png',
-                  '/home/aleksanyan/PycharmProjects/dot/src/images/packman gost/gost_blue.png',
-                  '/home/aleksanyan/PycharmProjects/dot/src/images/packman gost/gost_pink.png',
-                  '/home/aleksanyan/PycharmProjects/dot/src/images/packman gost/gost_orage.png')
+    gosts_path = ('./src/images/packman gost/gost_red.png',
+                  './src/images/packman gost/gost_blue.png',
+                  './src/images/packman gost/gost_pink.png',
+                  './src/images/packman gost/gost_orage.png')
     gost = pygame.image.load(random.choice(gosts_path))
 
     while True:
@@ -58,22 +58,22 @@ def run(screen, window_color=screen_color, window=window_size):
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_UP]:
-            packman_open_path = '/home/aleksanyan/PycharmProjects/dot/src/images/packman/u.png'
+            packman_open_path = './src/images/packman/u.png'
             entity.update_images(packman_open_path)
             screen.blit(entity.image, (entity.x, entity.y))
             entity.go_up()
         if keys[pygame.K_DOWN]:
-            packman_open_path = '/home/aleksanyan/PycharmProjects/dot/src/images/packman/d.png'
+            packman_open_path = './src/images/packman/d.png'
             entity.update_images(packman_open_path)
             screen.blit(entity.image, (entity.x, entity.y))
             entity.go_down()
         if keys[pygame.K_LEFT]:
-            packman_open_path = '/home/aleksanyan/PycharmProjects/dot/src/images/packman/l.png'
+            packman_open_path = './src/images/packman/l.png'
             entity.update_images(packman_open_path)
             screen.blit(entity.image, (entity.x, entity.y))
             entity.go_left()
         if keys[pygame.K_RIGHT]:
-            packman_open_path = '/home/aleksanyan/PycharmProjects/dot/src/images/packman/r.png'
+            packman_open_path = './src/images/packman/r.png'
             entity.update_images(packman_open_path)
             screen.blit(entity.image, (entity.x, entity.y))
             entity.go_right()
@@ -100,6 +100,7 @@ def run(screen, window_color=screen_color, window=window_size):
                 screen.blit(entity.image, (entity.x, entity.y))
                 pygame.display.update()
                 quantity_dot += 1
+
 
 if __name__ == '__main__':
     run(init())
