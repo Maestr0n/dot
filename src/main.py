@@ -10,7 +10,7 @@ screen_color = (255, 255, 255)
 
 def init():
     pygame.init()
-    icon_path = '/home/aleksanyan/PycharmProjects/dot/src/images/icon.png'
+    icon_path = './src/images/icon.png'
 
     screen = pygame.display.set_mode(window_size)
     pygame.display.set_caption('DoT')
@@ -34,7 +34,7 @@ def run(screen,  window_color=screen_color, window=window_size):
     quantity_dot = 0
     dot_x = window[0] // 2
     dot_y = window[1] // 2
-    entity_image_path = '/home/aleksanyan/PycharmProjects/dot/src/images/smile.png'
+    entity_image_path = './src/images/smile.png'
     entity = Entity(entity_image_path, dot_x, dot_y, window)
     point = random_color_cord(window_color)
     #pinocio_image = pygame.image.load('/home/aleksanyan/PycharmProjects/dot/src/images/pinocio.png')
